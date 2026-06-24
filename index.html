@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIDAN Scanner Platform</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ═══════════════ LANDING PAGE ═══════════════ -->
+<div id="page-landing" class="page active">
+  <div class="landing-badge">▸ HIDAN SCANNER PLATFORM v1.8</div>
+  <h1 class="landing-title">SCAN.<span>DETECT.</span><br>PROTECT.</h1>
+  <p class="landing-sub" style="font-family:sans-serif">
+    Advanced system scanner for Windows. Detects suspicious files, prefetch traces, event log anomalies, and deleted file artifacts — all from a secure web dashboard.
+  </p>
+  <div class="landing-btns">
+    <button class="btn-red" onclick="showPage('page-pricing')">View Plans</button>
+    <button class="btn-ghost" onclick="showPage('page-auth')">Sign In</button>
+  </div>
+  <div class="landing-stats">
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">SCAN CATEGORIES</div></div>
+    <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">DETECTION METHODS</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">LOCAL EXECUTION</div></div>
+    <div class="stat-item"><div class="stat-num">v1.8</div><div class="stat-label">CURRENT BUILD</div></div>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">📁</div>
+      <div class="feat-title">File System Scan</div>
+      <div class="feat-desc">Deep scan of all drives for suspicious executables, hidden files, double extensions, and temp directory anomalies.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📋</div>
+      <div class="feat-title">Prefetch Analysis</div>
+      <div class="feat-desc">Inspect Windows Prefetch entries for traces of hack tools, injectors, aimbots, and bypasses.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🗂</div>
+      <div class="feat-title">Event Viewer Logs</div>
+      <div class="feat-desc">Query Application Event Log for IDs 1000 and 1001 — crash signatures that reveal unauthorized software.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🗑</div>
+      <div class="feat-title">Deleted File Traces</div>
+      <div class="feat-desc">Surface residual traces in Recycle Bin, temp folders, and system volume from recently deleted items.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ AUTH PAGE ═══════════════ -->
+<div id="page-auth" class="page">
+  <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:40px 20px;">
+    <div class="auth-box">
+      <div class="auth-logo">
+        <div class="logo-icon">H</div>
+        <h2>HIDAN SCANNER</h2>
+        <p>Secure access portal</p>
+      </div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchTab('login')">SIGN IN</button>
+        <button class="auth-tab" onclick="switchTab('register')">REGISTER</button>
+      </div>
+      <div id="auth-error" class="auth-error"></div>
+      <div id="auth-success" class="auth-success"></div>
+
+      <!-- Login Form -->
+      <div id="form-login">
+        <div class="form-group">
+          <label class="form-label">EMAIL</label>
+          <input type="email" id="login-email" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">PASSWORD</label>
+          <input type="password" id="login-pass" placeholder="••••••••" />
+        </div>
+        <button class="btn-red" style="width:100%;margin-top:6px;" onclick="doLogin()">SIGN IN →</button>
+        <div class="auth-footer">
+          Don't have an account? <a class="auth-link" onclick="switchTab('register')">Register</a>
+          &nbsp;·&nbsp; <a class="auth-link" onclick="showPage('page-landing')">← Back</a>
+        </div>
+      </div>
+
+      <!-- Register Form -->
+      <div id="form-register" class="hidden">
+        <div class="form-group">
+          <label class="form-label">FULL NAME</label>
+          <input type="text" id="reg-name" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">EMAIL</label>
+          <input type="email" id="reg-email" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">PASSWORD</label>
+          <input type="password" id="reg-pass" placeholder="Min. 6 characters" />
+        </div>
+        <button class="btn-red" style="width:100%;margin-top:6px;" onclick="doRegister()">CREATE ACCOUNT →</button>
+        <div class="auth-footer">
+          Already registered? <a class="auth-link" onclick="switchTab('login')">Sign in</a>
+          &nbsp;·&nbsp; <a class="auth-link" onclick="showPage('page-landing')">← Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ PRICING PAGE ═══════════════ -->
+<div id="page-pricing" class="page">
+  <div style="flex:1; display:flex; flex-direction:column; align-items:center; padding:60px 20px; text-align:center;">
+    <div class="landing-badge">SUBSCRIPTION PLANS</div>
+    <h2 class="pricing-title">Choose Your Plan</h2>
+    <p class="pricing-sub">All plans include the local scanner agent + secure web dashboard access.</p>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-name">BASIC</div>
+        <div class="plan-price">$4<span>/mo</span></div>
+        <div class="plan-period">billed monthly · cancel anytime</div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li>Full system file scan</li>
+          <li>Prefetch analysis</li>
+          <li>Event log inspection</li>
+          <li>10 scans per month</li>
+          <li>30-day scan history</li>
+          <li>Email support</li>
+        </ul>
+        <div class="plan-btn">
+          <button class="btn-ghost" style="width:100%" onclick="selectPlan('Basic')">Get Started</button>
+        </div>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-featured-badge">MOST POPULAR</div>
+        <div class="plan-name">PRO</div>
+        <div class="plan-price">$9<span>/mo</span></div>
+        <div class="plan-period">billed monthly · cancel anytime</div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li>Everything in Basic</li>
+          <li>Deleted file trace scan</li>
+          <li>Unlimited scans</li>
+          <li>90-day scan history</li>
+          <li>Priority support</li>
+          <li>Shareable scan report link</li>
+        </ul>
+        <div class="plan-btn">
+          <button class="btn-red" style="width:100%" onclick="selectPlan('Pro')">Get Pro</button>
+        </div>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">ANNUAL PRO</div>
+        <div class="plan-price">$79<span>/yr</span></div>
+        <div class="plan-period">$6.58/mo · save 27%</div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li>Everything in Pro</li>
+          <li>1-year scan history</li>
+          <li>Multi-PC support (3 machines)</li>
+          <li>API access for results</li>
+          <li>Dedicated support</li>
+          <li>Early access to new features</li>
+        </ul>
+        <div class="plan-btn">
+          <button class="btn-ghost" style="width:100%" onclick="selectPlan('Annual Pro')">Get Annual</button>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:32px; font-size:12px; color:var(--text3); font-family:sans-serif;">
+      <a class="auth-link" onclick="showPage('page-landing')">← Back to home</a>
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════ DASHBOARD ═══════════════ -->
+<div id="page-dashboard" class="page">
+  <div class="topbar">
+    <div class="topbar-logo">
+      <div class="logo-icon">H</div>
+      <span class="logo-text">HIDAN</span><span class="logo-version">v1.8</span>
+    </div>
+    <div class="topbar-right">
+      <div class="user-pill">
+        <div class="user-dot"></div>
+        <span id="topbar-username">user@email.com</span>
+        <span class="tag tag-red" id="topbar-plan" style="font-size:10px">PRO</span>
+      </div>
+      <button class="btn-logout" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+  <div class="dash-layout">
+    <div class="sidebar">
+      <div class="sidebar-section-label">MAIN</div>
+      <div class="sidebar-item active" onclick="showDashTab('overview')">
+        <span class="si-icon">◈</span> Overview
+      </div>
+      <div class="sidebar-item" onclick="showDashTab('scan')">
+        <span class="si-icon">⬡</span> Run Scan
+      </div>
+      <div class="sidebar-item" onclick="showDashTab('history')">
+        <span class="si-icon">☰</span> Scan History
+      </div>
+      <div class="sidebar-section-label">CATEGORIES</div>
+      <div class="sidebar-item" onclick="showDashTab('files')">
+        <span class="si-icon">📁</span> File Scan
+        <span class="sidebar-badge" id="badge-files">0</span>
+      </div>
+      <div class="sidebar-item" onclick="showDashTab('prefetch')">
+        <span class="si-icon">📋</span> Prefetch
+        <span class="sidebar-badge" id="badge-prefetch">0</span>
+      </div>
+      <div class="sidebar-item" onclick="showDashTab('events')">
+        <span class="si-icon">🗂</span> Event Logs
+        <span class="sidebar-badge" id="badge-events">0</span>
+      </div>
+      <div class="sidebar-item" onclick="showDashTab('deleted')">
+        <span class="si-icon">🗑</span> Deleted Traces
+        <span class="sidebar-badge" id="badge-deleted">0</span>
+      </div>
+      <div class="sidebar-section-label">ACCOUNT</div>
+      <div class="sidebar-item" onclick="showDashTab('download')">
+        <span class="si-icon">↓</span> Get Agent
+      </div>
+      <div class="sidebar-item" onclick="showDashTab('account')">
+        <span class="si-icon">◎</span> My Account
+      </div>
+    </div>
+
+    <div class="main-content" id="dash-content">
+      <!-- Overview tab -->
+      <div id="tab-overview">
+        <div class="page-title">Dashboard Overview</div>
+        <div class="page-subtitle" id="last-scan-time">No scan yet — run your first scan to see results</div>
+        <div class="metrics-row">
+          <div class="metric-card" id="metric-total">
+            <div class="metric-label">TOTAL FLAGS</div>
+            <div class="metric-value red" id="m-total">—</div>
+            <div class="metric-sub">across all categories</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">FILE SCAN</div>
+            <div class="metric-value" id="m-files">—</div>
+            <div class="metric-sub">flagged files</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">PREFETCH</div>
+            <div class="metric-value" id="m-prefetch">—</div>
+            <div class="metric-sub">suspicious entries</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">EVENT LOGS</div>
+            <div class="metric-value" id="m-events">—</div>
+            <div class="metric-sub">anomalies</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">DELETED TRACES</div>
+            <div class="metric-value" id="m-deleted">—</div>
+            <div class="metric-sub">recent traces</div>
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="section-header" style="cursor:default">
+            <div class="section-header-left">
+              <span class="section-icon">◉</span>
+              <span class="section-title">QUICK START</span>
+            </div>
+          </div>
+          <div class="section-body" style="font-family:sans-serif; font-size:12px; color:var(--text2); line-height:2;">
+            <b style="color:var(--text)">1.</b> Go to <a class="auth-link" onclick="showDashTab('download')">Get Agent</a> and download the Hidan Scanner agent to your Windows PC.<br>
+            <b style="color:var(--text)">2.</b> Run the agent — it scans locally and submits results to this dashboard via a secure link.<br>
+            <b style="color:var(--text)">3.</b> Return here and open the <a class="auth-link" onclick="showDashTab('scan')">Run Scan</a> tab to simulate or trigger a new scan.<br>
+            <b style="color:var(--text)">4.</b> Review each category separately using the left sidebar.
+          </div>
+        </div>
+      </div>
+
+      <!-- Run Scan tab -->
+      <div id="tab-scan" class="hidden">
+        <div class="page-title">Run Scan</div>
+        <div class="page-subtitle">Trigger a full system scan from your installed Hidan Agent</div>
+        <div class="scan-btn-area">
+          <button class="btn-red" id="btn-scan" onclick="startScan()">▶ START FULL SCAN</button>
+          <span style="font-size:12px; color:var(--text3); font-family:sans-serif;">Agent must be running on your PC</span>
+        </div>
+        <div class="scan-progress" id="scan-progress">
+          <div style="font-size:11px; color:var(--text3); letter-spacing:1px; margin-bottom:10px;">SCAN LOG</div>
+          <div class="scan-log" id="scan-log"></div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="section-header" style="cursor:default">
+            <div class="section-header-left">
+              <span class="section-icon">⚙</span>
+              <span class="section-title">SCAN OPTIONS</span>
+            </div>
+          </div>
+          <div class="section-body">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);cursor:pointer">
+                <input type="checkbox" checked style="width:auto;background:transparent;border-color:var(--border)"> File System Scan
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);cursor:pointer">
+                <input type="checkbox" checked style="width:auto;background:transparent;border-color:var(--border)"> Prefetch Analysis
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);cursor:pointer">
+                <input type="checkbox" checked style="width:auto;background:transparent;border-color:var(--border)"> Event Viewer Logs
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);cursor:pointer">
+                <input type="checkbox" checked style="width:auto;background:transparent;border-color:var(--border)"> Deleted File Traces
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- History tab -->
+      <div id="tab-history" class="hidden">
+        <div class="page-title">Scan History</div>
+        <div class="page-subtitle">All past scans — click a result to load it into the dashboard</div>
+        <div class="section-card">
+          <div class="history-row history-header">
+            <span>DATE / TIME</span><span>MACHINE</span><span>FLAGS</span><span>STATUS</span><span></span>
+          </div>
+          <div id="history-body">
+            <div class="empty-state"><div class="empty-icon">📂</div>No scan history yet. Run your first scan.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- File Scan tab -->
+      <div id="tab-files" class="hidden">
+        <div class="page-title">File System Scan</div>
+        <div class="page-subtitle">Suspicious executables, hidden files, double extensions, temp-directory anomalies</div>
+        <div id="results-files"><div class="empty-state"><div class="empty-icon">✓</div>No results yet — run a scan first</div></div>
+      </div>
+
+      <!-- Prefetch tab -->
+      <div id="tab-prefetch" class="hidden">
+        <div class="page-title">Prefetch Analysis</div>
+        <div class="page-subtitle">Windows Prefetch directory entries flagged for suspicious application keywords</div>
+        <div id="results-prefetch"><div class="empty-state"><div class="empty-icon">✓</div>No results yet — run a scan first</div></div>
+      </div>
+
+      <!-- Event Logs tab -->
+      <div id="tab-events" class="hidden">
+        <div class="page-title">Event Viewer Logs</div>
+        <div class="page-subtitle">Application Event Log — Event IDs 1000 and 1001 (crashes &amp; hangs)</div>
+        <div id="results-events"><div class="empty-state"><div class="empty-icon">✓</div>No results yet — run a scan first</div></div>
+      </div>
+
+      <!-- Deleted Traces tab -->
+      <div id="tab-deleted" class="hidden">
+        <div class="page-title">Deleted File Traces</div>
+        <div class="page-subtitle">Residual traces in Recycle Bin, temp folders, and system volume</div>
+        <div id="results-deleted"><div class="empty-state"><div class="empty-icon">✓</div>No results yet — run a scan first</div></div>
+      </div>
+
+      <!-- Download tab -->
+      <div id="tab-download" class="hidden">
+        <div class="page-title">Get the Scanner Agent</div>
+        <div class="page-subtitle">The agent runs locally on your Windows PC and sends results to this dashboard</div>
+        <div class="dl-card">
+          <h3>Download Agent</h3>
+          <p>The Hidan Agent is a lightweight Python script that runs the full scan locally — nothing is executed remotely. After scanning it sends a secure JSON payload to your account.</p>
+          <button class="btn-red" onclick="showToast('Download would start here in production')">↓ Download hidan_agent_v1.8.py</button>
+          <div style="margin-top:12px; font-size:11px; color:var(--text3); font-family:sans-serif;">Windows 10/11 · Python 3.8+ required · ~42 KB</div>
+        </div>
+        <div class="dl-card">
+          <h3>Setup Instructions</h3>
+          <p>Follow these steps to connect the agent to your account:</p>
+          <ol class="step-list">
+            <li>Install Python 3.8 or newer from python.org if you don't have it</li>
+            <li>Download the agent file above and place it anywhere on your PC</li>
+            <li>Open Command Prompt and navigate to the folder containing the agent</li>
+            <li>Run the agent with your account token:</li>
+          </ol>
+          <div class="code-block" id="agent-cmd">python hidan_agent_v1.8.py --token YOUR_TOKEN_HERE</div>
+          <div style="font-size:11px; color:var(--text3); font-family:sans-serif;">Your token: <span style="color:var(--red2)" id="user-token">HIDAN-XXXX-XXXX-XXXX</span></div>
+        </div>
+        <div class="dl-card">
+          <h3>What the Agent Scans</h3>
+          <p>All scanning happens entirely on your machine. The agent never uploads file contents — only metadata (names, paths, modification times, flags).</p>
+          <ul class="plan-features" style="list-style:none">
+            <li style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);padding:5px 0;font-family:sans-serif"><span style="color:var(--red2)">▸</span> Temp directories (User + System)</li>
+            <li style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);padding:5px 0;font-family:sans-serif"><span style="color:var(--red2)">▸</span> Downloads folder and Desktop</li>
+            <li style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);padding:5px 0;font-family:sans-serif"><span style="color:var(--red2)">▸</span> Windows Prefetch directory</li>
+            <li style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);padding:5px 0;font-family:sans-serif"><span style="color:var(--red2)">▸</span> Application Event Log (IDs 1000, 1001)</li>
+            <li style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);padding:5px 0;font-family:sans-serif"><span style="color:var(--red2)">▸</span> Recycle Bin and shadow copy traces</li>
+            <li style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);padding:5px 0;font-family:sans-serif"><span style="color:var(--red2)">▸</span> Full drive scan (all connected drives)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Account tab -->
+      <div id="tab-account" class="hidden">
+        <div class="page-title">My Account</div>
+        <div class="page-subtitle">Manage your subscription and profile</div>
+        <div class="account-grid">
+          <div class="acct-card">
+            <h3>PROFILE</h3>
+            <div class="acct-row"><span class="acct-key">Name</span><span class="acct-val" id="acct-name">—</span></div>
+            <div class="acct-row"><span class="acct-key">Email</span><span class="acct-val" id="acct-email">—</span></div>
+            <div class="acct-row"><span class="acct-key">Member since</span><span class="acct-val" id="acct-since">—</span></div>
+            <div class="acct-row"><span class="acct-key">API Token</span><span class="acct-val" style="color:var(--text3); font-size:11px" id="acct-token">—</span></div>
+          </div>
+          <div class="acct-card">
+            <h3>SUBSCRIPTION</h3>
+            <div class="acct-row">
+              <span class="acct-key">Status</span>
+              <span class="sub-status"><span style="width:6px;height:6px;background:var(--green2);border-radius:50%;display:inline-block"></span> Active</span>
+            </div>
+            <div class="acct-row"><span class="acct-key">Plan</span><span class="acct-val" id="acct-plan">—</span></div>
+            <div class="acct-row"><span class="acct-key">Renews</span><span class="acct-val" id="acct-renews">—</span></div>
+            <div class="acct-row"><span class="acct-key">Scans used</span><span class="acct-val" id="acct-scans">0 / Unlimited</span></div>
+            <div style="margin-top:16px; display:flex; gap:10px;">
+              <button class="btn-ghost" style="font-size:11px;padding:7px 14px" onclick="showToast('Upgrade flow would open here')">Upgrade Plan</button>
+              <button class="btn-ghost" style="font-size:11px;padding:7px 14px;color:var(--text3)" onclick="showToast('Cancellation flow would open here')">Cancel</button>
+            </div>
+          </div>
+          <div class="acct-card">
+            <h3>CHANGE PASSWORD</h3>
+            <div class="form-group" style="margin-bottom:10px">
+              <label class="form-label">CURRENT PASSWORD</label>
+              <input type="password" placeholder="••••••••" />
+            </div>
+            <div class="form-group" style="margin-bottom:10px">
+              <label class="form-label">NEW PASSWORD</label>
+              <input type="password" placeholder="••••••••" />
+            </div>
+            <button class="btn-red" style="font-size:12px;padding:9px 18px" onclick="showToast('Password change saved')">Save Password</button>
+          </div>
+          <div class="acct-card">
+            <h3>CONNECTED MACHINES</h3>
+            <div id="machines-list">
+              <div class="acct-row"><span class="acct-key">DESKTOP-7K92M</span><span class="tag tag-green">Online</span></div>
+            </div>
+            <div style="margin-top:14px; font-size:11px; color:var(--text3); font-family:sans-serif;">Machines connect automatically when the agent runs with your token.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="scripts.js"></script>
+</body>
+</html>
